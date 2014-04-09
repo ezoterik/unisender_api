@@ -5,6 +5,48 @@
  *
  * @see http://www.unisender.com/ru/help/api/
  * @version 1.3
+ *
+ * @method string|bool getLists(array $params) получить списки рассылки с их кодами
+ * @method string|bool createList(array $params) создать новый список рассылки
+ * @method string|bool updateList(array $params) изменить свойства списка рассылки
+ * @method string|bool deleteList(array $params) удалить список рассылки
+ * @method string|bool exclude(array $params) исключить адресата из списков рассылки
+ * @method string|bool unsubscribe(array $params) отписать адресата от рассылки
+ * @method string|bool importContacts(array $params) метод массового импорта подписчиков
+ * @method string|bool exportContacts(array $params) экспорт всех данных контактов
+ *
+ * @method string|bool createEmailMessage(array $params) создать e-mail для массовой рассылки
+ * @method string|bool createSmsMessage(array $params) создать SMS для массовой рассылки
+ * @method string|bool createCampaign(array $params) запланировать массовую отправку e-mail или SMS сообщения
+ * @method string|bool getCampaigns(array $params) получить список рассылок
+ * @method string|bool getCampaignStatus(array $params) получить статус рассылки
+ * @method string|bool sendSms(array $params) отправить SMS-сообщение
+ * @method string|bool checkSms(array $params) проверить статус доставки SMS
+ * @method string|bool sendEmail(array $params) упрощённая отправка индивидуальных email-сообщений
+ * @method string|bool checkEmail(array $params) проверить статус доставки email
+ * @method string|bool updateOptInEmail(array $params) изменить текст письма со ссылкой подтверждения подписки
+ * @method string|bool deleteMessage(array $params) удалить сообщение
+ *
+ * @method string|bool getCampaignDeliveryStats(array $params) получить отчёт о статусах доставки сообщений для заданной рассылки
+ * @method string|bool getCampaignAggregateStats(array $params) получить отчёт о статусах доставки сообщений для заданной рассылки, сгруппированных по типам результата
+ * @method string|bool getVisitedLinks(array $params) получить статистику переходов по ссылкам
+ *
+ * @method string|bool getFields(array $params) получить список пользовательских полей
+ * @method string|bool createField(array $params) создать новое поле
+ * @method string|bool updateField(array $params) изменить параметры поля
+ * @method string|bool deleteField(array $params) удалить поле
+ * @method string|bool getTags(array $params) получить список пользовательских меток
+ * @method string|bool deleteTag(array $params) удалить метку
+ *
+ * @method string|bool validateSender(array $params) подтвердить обратный адрес
+ * @method string|bool register(array $params) зарегистрировать пользователя (для партнёрских сайтов)
+ * @method string|bool checkUserExists(array $params) проверить существование пользователя по логину или email
+ * @method string|bool getUserInfo(array $params) получить информацию о пользователе (для партнёрских сайтов)
+ * @method string|bool getUsers(array $params) получить информацию о пользователях (для партнёрских сайтов)
+ * @method string|bool transferMoney(array $params) перевести деньги на счёт пользователя (для партнёрских сайтов)
+ * @method string|bool getPayments(array $params) получить список платежей пользователя (для партнёрских сайтов)
+ * @method string|bool getTariffs(array $params) получить список тарифов (для партнёрских сайтов)
+ * @method string|bool changeTariff(array $params) переключить тариф пользователю (для партнёрских сайтов)
  */
 class UniSenderApi {
 	/**
