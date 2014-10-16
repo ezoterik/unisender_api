@@ -191,32 +191,28 @@ class UniSenderApi {
 
 		if ($this->Compression) {
 			$Url .= '&api_key=' . $this->ApiKey . '&request_compression=bzip2';
-			$Content = bzcompress(http_build_query($Params));
 		} else {
 			$Params = array_merge((array)$Params, array('api_key' => $this->ApiKey));
-			$Content = http_build_query($Params);
-		}
-
-		$ContextOptions = array(
-			'http' => array(
-				'method'  => 'POST',
-				'header'  => 'Content-type: application/x-www-form-urlencoded',
-				'content' => $Content,
-			)
-		);
-
-		if ($this->Timeout) {
-			$ContextOptions['http']['timeout'] = $this->Timeout;
 		}
 
 		$RetryCount = 0;
-		$Context = stream_context_create($ContextOptions);
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $Params);
+		if ($this->Timeout) {
+			curl_setopt($ch, CURLOPT_TIMEOUT, $this->Timeout);
+		}
 
 		do {
 			$Host = $this->getApiHost($RetryCount);
-			$Result = @file_get_contents($Host . $Url, false, $Context);
+			curl_setopt($ch, CURLOPT_URL, $Host . $Url);
+			$Result = curl_exec($ch);
 			$RetryCount++;
 		} while ($Result === false && $RetryCount < $this->RetryCount);
+
+		curl_close($ch);
 
 		return $Result;
 	}
